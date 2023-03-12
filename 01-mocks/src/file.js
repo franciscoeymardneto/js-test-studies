@@ -10,8 +10,9 @@ class File{
     static async csvToJson(filePath){
         const content = await File.getFileContent(filePath)
         const validation = File.isValid(content)
+
         if (!validation.valid) throw new Error(validation.error)
-        
+
         return content
     }
     static async getFileContent(filePath){
@@ -30,18 +31,27 @@ class File{
             
         }
 
-        if (content.length > options.maxLine) {
+        const isContentLegthAccept = (
+            content.length > 0 &&
+            content.length <= options.maxLine
+        )
+
+        if (!isContentLegthAccept) {
             return {
                 error: errorMessages.FILE_LENGTH_ERROR_MESSAGE,
                 valid: false
             }
         }
+
+        return {
+            valid: true
+        }
     }
 }
 
 (async ()=> {
-    // const result = await File.csvToJson('./../mocks/threeItems-valid.csv')
-    const result = await File.csvToJson('./../mocks/header-invalid.csv')
+    const result = await File.csvToJson('./../mocks/threeItems-valid.csv')
+    // const result = await File.csvToJson('./../mocks/header-invalid.csv')
     //console.log(result)
 
 })()
