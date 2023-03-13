@@ -3,5 +3,8 @@
     "mocha": "^10.2.0",
     "sinon": "^15.0.2",
     "supertest": "^6.3.3"
+  },
+  "scripts": {
+    "test": "npx mocha -w ./*/src/*.test.js"
   }
 }
