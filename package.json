@@ -6,6 +6,7 @@
     "supertest": "^6.3.3"
   },
   "scripts": {
-    "test": "npx mocha -w ./*/src/*.test.js"
+    "test": "npx mocha -w ./*/src/*.test.js",
+    "test:co": "npx nyc npx mocha --parallel ./*/src/*.test.js"
   }
 }

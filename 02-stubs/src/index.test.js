@@ -3,20 +3,15 @@ const sinon = require('sinon')
 const Service = require('./service')
 const BASE_URL_1 = 'https://swapi.dev/api/planets/1/'
 const BASE_URL_2 = 'https://swapi.dev/api/planets/2/'
+const BROKEN_URL = 'https://swapi.dev/api/plannets/2/'
 const mocks = {
     tatooine: require('./mocks/tatooine.json'),
     alderaan: require('./mocks/alderaan.json')
 }
 
     ; (async () => {
-        // {
-        //     // vai para internet
-        //     const service = new Service()
-        //     const response = await service.makeRequest(BASE_URL_2)
-        //     console.log(JSON.stringify(response))
 
-        // }
-
+        // testing the service feastures
         const service = new Service()
         const stub = sinon.stub(service, service.makeRequest.name)
 
@@ -28,6 +23,7 @@ const mocks = {
             .withArgs(BASE_URL_2)
             .resolves(mocks.alderaan)
 
+
         {
             const response = await service.getPlanets(BASE_URL_2)
             const required = {
@@ -36,8 +32,9 @@ const mocks = {
                 appearedIn: 2
             }
 
-            deepStrictEqual(response,required)
+            deepStrictEqual(response, required)
         }
+
 
         {
             const response = await service.getPlanets(BASE_URL_1)
@@ -47,6 +44,6 @@ const mocks = {
                 appearedIn: 5
             }
 
-            deepStrictEqual(response,required)
+            deepStrictEqual(response, required)
         }
     })()

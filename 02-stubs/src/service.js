@@ -1,5 +1,4 @@
 const https = require("node:https")
-const { resolve } = require("node:path")
 
 class Service {
     async makeRequest(url) {
